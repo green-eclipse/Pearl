@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Pre-Rich?</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  body {
+    background: radial-gradient(circle at top, #0b0b0b, #000);
+    font-family: Inter, Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .card {
+    background: rgba(15,15,15,0.96);
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(0,0,0,.7);
+    position: relative;
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  #memeContent {
+    background: #0b0b0b;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 14px 0;
+    display: none;
+  }
+  .result {
+    margin-top: 14px;
+    font-size: 20px;
+    font-weight: 600;
+    min-height: 28px;
+    color: #2af598;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #2af598, #009efd);
+    color: #000;
+    margin-top: 10px;
+  }
+  .footer {
+    margin-top: 18px;
+    font-size: 12px;
+    opacity: .5;
+  }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <h1>🐻 Still Pre-Rich?</h1>
+
+  <button id="checkBtn">Check Status</button>
+
+  <div id="memeContent">
+    <img id="bearImg" />
+    <div class="result" id="result"></div>
+  </div>
+
+  <button id="screenshotBtn" style="display:none;" onclick="takeScreenshot()">Take Screenshot</button>
+
+  <div class="footer">$PEARL vibes only 👀</div>
+</div>
+
+<script>
+const outcomes = [
+  { text: "Still pre-rich", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770588565/1770587975617_yheavi.png", weight: 10 },
+  { text: "Early but impatient", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588881778_brobx9.png", weight: 8 },
+  { text: "Watching charts instead of sleeping", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588932216_l0qpmd.png", weight: 8 },
+  { text: "Mentally rich, financially loading", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588972845_pwd4co.png", weight: 7 },
+  { text: "Too early to brag", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770589010374_fo19e7.png", weight: 7 }
+];
+
+function weightedRandom(list) {
+  const totalWeight = list.reduce((sum, item) => sum + item.weight, 0);
+  let rand = Math.random() * totalWeight;
+  for (let item of list) {
+    if (rand < item.weight) return item;
+    rand -= item.weight;
+  }
+}
+
+function checkStatus() {
+  const pick = weightedRandom(outcomes);
+
+  const img = document.getElementById("bearImg");
+  img.src = pick.img;
+  img.style.display = "block";
+
+  document.getElementById("result").textContent = pick.text;
+
+  // Show screenshot button after image appears
+  document.getElementById("screenshotBtn").style.display = "block";
+
+  // Save current result
+  window.currentResult = pick;
+}
+
+// Screenshot function using html2canvas
+function takeScreenshot() {
+  const memeContent = document.getElementById("memeContent");
+
+  html2canvas(memeContent, { backgroundColor: "#0b0b0b" }).then(canvas => {
+    canvas.toBlob(function(blob) {
+      const link = document.createElement("a");
+      link.download = "still_pre_rich.png";
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }, "image/png");
+  });
+}
+
+document.getElementById("checkBtn").addEventListener("click", checkStatus);
+</script>
+</body>
+  </html>
