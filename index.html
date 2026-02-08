@@ -74,7 +74,7 @@
   <button id="checkBtn">Check Status</button>
 
   <div id="memeContent">
-    <img id="bearImg" />
+    <img id="bearImg" crossOrigin="anonymous"/>
     <div class="result" id="result"></div>
   </div>
 
@@ -111,20 +111,19 @@ function checkStatus() {
   // Hide screenshot button until image fully loads
   screenshotBtn.style.display = "none";
 
-  // Set text immediately
+  // Set result text
   resultDiv.textContent = pick.text;
 
   // Set image src
-  img.style.display = "none"; // hide until loaded
+  img.style.display = "none";
   img.src = pick.img;
 
-  // Wait for image to load before showing & enabling screenshot
+  // Wait for image to fully load
   img.onload = () => {
     img.style.display = "block";
-    screenshotBtn.style.display = "block";
-  }
+    screenshotBtn.style.display = "block"; // show screenshot button now
+  };
 
-  // Save current result
   window.currentResult = pick;
 }
 
@@ -132,16 +131,19 @@ function takeScreenshot() {
   const memeContent = document.getElementById("memeContent");
   const screenshotBtn = document.getElementById("screenshotBtn");
 
-  html2canvas(memeContent, { backgroundColor: "#0b0b0b" }).then(canvas => {
+  // Hide the button immediately
+  screenshotBtn.style.display = "none";
+
+  html2canvas(memeContent, { backgroundColor: "#0b0b0b", useCORS: true }).then(canvas => {
     canvas.toBlob(function(blob) {
       const link = document.createElement("a");
       link.download = "still_pre_rich.png";
       link.href = URL.createObjectURL(blob);
       link.click();
-
-      // Hide screenshot button after usage
-      screenshotBtn.style.display = "none";
     }, "image/png");
+  }).catch(err => {
+    console.error("Screenshot failed:", err);
+    alert("Screenshot failed. Make sure you allow cross-origin images.");
   });
 }
 
