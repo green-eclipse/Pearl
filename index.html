@@ -105,21 +105,32 @@ function checkStatus() {
   const pick = weightedRandom(outcomes);
 
   const img = document.getElementById("bearImg");
+  const resultDiv = document.getElementById("result");
+  const screenshotBtn = document.getElementById("screenshotBtn");
+
+  // Hide screenshot button until image fully loads
+  screenshotBtn.style.display = "none";
+
+  // Set text immediately
+  resultDiv.textContent = pick.text;
+
+  // Set image src
+  img.style.display = "none"; // hide until loaded
   img.src = pick.img;
-  img.style.display = "block";
 
-  document.getElementById("result").textContent = pick.text;
-
-  // Show screenshot button after image appears
-  document.getElementById("screenshotBtn").style.display = "block";
+  // Wait for image to load before showing & enabling screenshot
+  img.onload = () => {
+    img.style.display = "block";
+    screenshotBtn.style.display = "block";
+  }
 
   // Save current result
   window.currentResult = pick;
 }
 
-// Screenshot function using html2canvas
 function takeScreenshot() {
   const memeContent = document.getElementById("memeContent");
+  const screenshotBtn = document.getElementById("screenshotBtn");
 
   html2canvas(memeContent, { backgroundColor: "#0b0b0b" }).then(canvas => {
     canvas.toBlob(function(blob) {
@@ -127,6 +138,9 @@ function takeScreenshot() {
       link.download = "still_pre_rich.png";
       link.href = URL.createObjectURL(blob);
       link.click();
+
+      // Hide screenshot button after usage
+      screenshotBtn.style.display = "none";
     }, "image/png");
   });
 }
@@ -134,4 +148,4 @@ function takeScreenshot() {
 document.getElementById("checkBtn").addEventListener("click", checkStatus);
 </script>
 </body>
-  </html>
+</html>
