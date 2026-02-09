@@ -6,57 +6,75 @@
 <title>Still Pre-Rich?</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-  body {
-    background: radial-gradient(circle at top, #0b0b0b, #000);
-    font-family: Inter, Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  .card {
-    background: rgba(15,15,15,0.96);
-    border-radius: 20px;
-    padding: 24px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 60px rgba(0,0,0,.7);
-  }
-  h1 { font-size: 22px; margin-bottom: 12px; }
-  #memeContent {
-    background: #0b0b0b;
-    border-radius: 12px;
-    padding: 12px;
-  }
-  img {
-    width: 100%;
-    border-radius: 12px;
-    margin: 14px 0;
-    display: none;
-  }
-  .result {
-    margin-top: 14px;
-    font-size: 20px;
-    font-weight: 600;
-    min-height: 28px;
-    color: #2af598;
-  }
-  button {
-    width: 100%;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 14px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #2af598, #009efd);
-    color: #000;
-    margin-top: 10px;
-  }
-  .footer { margin-top: 18px; font-size: 12px; opacity: .5; }
+body {
+  background: radial-gradient(circle at top, #0b0b0b, #000);
+  font-family: Inter, Arial, sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.card {
+  background: rgba(15,15,15,0.96);
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(0,0,0,.7);
+}
+h1 { font-size: 22px; margin-bottom: 12px; }
+#memeContent {
+  background: #0b0b0b;
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 14px 0;
+  display: none;
+}
+.result {
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 600;
+  min-height: 28px;
+  color: #2af598;
+  text-align: center;
+}
+.placeholder {
+  width: 100%;
+  height: 200px;
+  background: rgba(42,245,152,0.1);
+  border: 2px dashed #2af598;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #2af598;
+  border-radius: 12px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #2af598, #009efd);
+  color: #000;
+  margin-top: 10px;
+}
+.footer { margin-top: 18px; font-size: 12px; opacity: .5; }
 </style>
 </head>
 <body>
@@ -76,8 +94,7 @@
 </div>
 
 <script>
-const outcomes = [
-  // First 10 with images
+let outcomes = [
   { text: "Still pre-rich", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770588565/1770587975617_yheavi.png", weight: 10 },
   { text: "Early but impatient", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588881778_brobx9.png", weight: 8 },
   { text: "Watching charts instead of sleeping", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588932216_l0qpmd.png", weight: 8 },
@@ -87,55 +104,23 @@ const outcomes = [
   { text: "Hodling like a champ", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633118/e2862903-3120-441a-a753-7aa228499ebb_nwdogr.png", weight: 6 },
   { text: "Watching $PEARL moon", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633129/c74f5316-0fd9-42ad-a8ab-436522264529_rycgqq.png", weight: 5 },
   { text: "Charts look wild", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633291/7791aa8f-bbb6-4b4f-a79f-7fb2bee8f87d_iq2tov.png", weight: 5 },
-  // Placeholder text-only outcomes to reach 50
-  { text: "Still pre-rich vibe #11", weight: 4 },
-  { text: "Still pre-rich vibe #12", weight: 4 },
-  { text: "Still pre-rich vibe #13", weight: 4 },
-  { text: "Still pre-rich vibe #14", weight: 4 },
-  { text: "Still pre-rich vibe #15", weight: 4 },
-  { text: "Still pre-rich vibe #16", weight: 4 },
-  { text: "Still pre-rich vibe #17", weight: 4 },
-  { text: "Still pre-rich vibe #18", weight: 4 },
-  { text: "Still pre-rich vibe #19", weight: 4 },
-  { text: "Still pre-rich vibe #20", weight: 4 },
-  { text: "Still pre-rich vibe #21", weight: 3 },
-  { text: "Still pre-rich vibe #22", weight: 3 },
-  { text: "Still pre-rich vibe #23", weight: 3 },
-  { text: "Still pre-rich vibe #24", weight: 3 },
-  { text: "Still pre-rich vibe #25", weight: 3 },
-  { text: "Still pre-rich vibe #26", weight: 3 },
-  { text: "Still pre-rich vibe #27", weight: 3 },
-  { text: "Still pre-rich vibe #28", weight: 3 },
-  { text: "Still pre-rich vibe #29", weight: 3 },
-  { text: "Still pre-rich vibe #30", weight: 3 },
-  { text: "Still pre-rich vibe #31", weight: 2 },
-  { text: "Still pre-rich vibe #32", weight: 2 },
-  { text: "Still pre-rich vibe #33", weight: 2 },
-  { text: "Still pre-rich vibe #34", weight: 2 },
-  { text: "Still pre-rich vibe #35", weight: 2 },
-  { text: "Still pre-rich vibe #36", weight: 2 },
-  { text: "Still pre-rich vibe #37", weight: 2 },
-  { text: "Still pre-rich vibe #38", weight: 2 },
-  { text: "Still pre-rich vibe #39", weight: 2 },
-  { text: "Still pre-rich vibe #40", weight: 2 },
-  { text: "Still pre-rich vibe #41", weight: 1 },
-  { text: "Still pre-rich vibe #42", weight: 1 },
-  { text: "Still pre-rich vibe #43", weight: 1 },
-  { text: "Still pre-rich vibe #44", weight: 1 },
-  { text: "Still pre-rich vibe #45", weight: 1 },
-  { text: "Still pre-rich vibe #46", weight: 1 },
-  { text: "Still pre-rich vibe #47", weight: 1 },
-  { text: "Still pre-rich vibe #48", weight: 1 },
-  { text: "Still pre-rich vibe #49", weight: 1 },
-  { text: "Still pre-rich vibe #50", weight: 1 }
+  // placeholders
+  { text: "Patiently waiting for gains", weight: 3 },
+  { text: "Diamond hands in progress", weight: 3 },
+  { text: "Checking charts like crazy", weight: 3 },
+  { text: "Early adopter vibes", weight: 3 },
+  { text: "Still pre-rich, but dreaming", weight: 3 }
 ];
 
+// shuffle outcomes on page load
+outcomes = outcomes.sort(() => Math.random() - 0.5);
+
 function weightedRandom(list) {
-  const total = list.reduce((s, i) => s + i.weight, 0);
+  const total = list.reduce((s, i) => s + (i.weight || 1), 0);
   let r = Math.random() * total;
   for (let item of list) {
-    if (r < item.weight) return item;
-    r -= item.weight;
+    if (r < (item.weight || 1)) return item;
+    r -= (item.weight || 1);
   }
 }
 
@@ -143,22 +128,29 @@ function checkStatus() {
   const pick = weightedRandom(outcomes);
   const img = document.getElementById("bearImg");
   const resultDiv = document.getElementById("result");
+  const memeContent = document.getElementById("memeContent");
   const screenshotBtn = document.getElementById("screenshotBtn");
 
-  resultDiv.textContent = pick.text;
+  // reset content
+  img.style.display = "none";
+  resultDiv.textContent = "";
+  memeContent.querySelectorAll(".placeholder").forEach(p => p.remove());
 
   if (pick.img) {
-    img.style.display = "none";
     img.src = pick.img;
     img.onload = () => {
       img.style.display = "block";
       screenshotBtn.style.display = "block";
-    }
+    };
   } else {
-    img.style.display = "none";
-    screenshotBtn.style.display = "block"; // show screenshot even if no image
+    const placeholder = document.createElement("div");
+    placeholder.className = "placeholder";
+    placeholder.textContent = pick.text;
+    memeContent.appendChild(placeholder);
+    screenshotBtn.style.display = "block";
   }
 
+  resultDiv.textContent = pick.text;
   window.currentResult = pick.text;
 }
 
@@ -174,9 +166,7 @@ function takeScreenshot() {
       link.href = URL.createObjectURL(blob);
       link.click();
     }, "image/png");
-  }).catch(err => {
-    console.error("Screenshot failed:", err);
-  });
+  }).catch(err => console.error("Screenshot failed:", err));
 }
 
 document.getElementById("checkBtn").addEventListener("click", checkStatus);
