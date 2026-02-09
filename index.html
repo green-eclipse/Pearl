@@ -95,6 +95,7 @@ button {
 
 <script>
 let outcomes = [
+  // 10 images
   { text: "Still pre-rich", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770588565/1770587975617_yheavi.png", weight: 10 },
   { text: "Early but impatient", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588881778_brobx9.png", weight: 8 },
   { text: "Watching charts instead of sleeping", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588932216_l0qpmd.png", weight: 8 },
@@ -104,15 +105,53 @@ let outcomes = [
   { text: "Hodling like a champ", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633118/e2862903-3120-441a-a753-7aa228499ebb_nwdogr.png", weight: 6 },
   { text: "Watching $PEARL moon", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633129/c74f5316-0fd9-42ad-a8ab-436522264529_rycgqq.png", weight: 5 },
   { text: "Charts look wild", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633291/7791aa8f-bbb6-4b4f-a79f-7fb2bee8f87d_iq2tov.png", weight: 5 },
-  // placeholders
-  { text: "Patiently waiting for gains", weight: 3 },
-  { text: "Diamond hands in progress", weight: 3 },
-  { text: "Checking charts like crazy", weight: 3 },
-  { text: "Early adopter vibes", weight: 3 },
-  { text: "Still pre-rich, but dreaming", weight: 3 }
+  { text: "Side-eyeing the dip", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588972845_pwd4co.png", weight: 5 },
+
+  // 40 text-only funny outcomes
+  { text: "I bought the dip emotionally", weight: 7 },
+  { text: "Sleeping on gains", weight: 6 },
+  { text: "Diamond hands… or itchy hands?", weight: 6 },
+  { text: "Charts are screaming at me", weight: 6 },
+  { text: "My wallet cries at night", weight: 5 },
+  { text: "Pearls of wisdom: HODL", weight: 5 },
+  { text: "Future screenshot merchant", weight: 5 },
+  { text: "Mentally bullish, physically broke", weight: 5 },
+  { text: "FOMO activated", weight: 4 },
+  { text: "CT will ask how I found this", weight: 4 },
+  { text: "Still pre-rich, but dreaming", weight: 4 },
+  { text: "Waiting for the moon like…", weight: 4 },
+  { text: "Emotional rollercoaster trader", weight: 4 },
+  { text: "Coffee-powered hodler", weight: 3 },
+  { text: "Me vs the dip", weight: 3 },
+  { text: "I live in my charts", weight: 3 },
+  { text: "HODL gang in training", weight: 3 },
+  { text: "My wallet needs therapy", weight: 3 },
+  { text: "Still pre-rich, still shiny-eyed", weight: 3 },
+  { text: "Watching $PEARL like Netflix", weight: 3 },
+  { text: "Bought too early, proud anyway", weight: 2 },
+  { text: "Future whale in progress", weight: 2 },
+  { text: "Mom asks why I stare at charts", weight: 2 },
+  { text: "Checking FOMO levels daily", weight: 2 },
+  { text: "My wallet smells like pearls", weight: 2 },
+  { text: "I believe in the hype… cautiously", weight: 2 },
+  { text: "Holding through existential fear", weight: 2 },
+  { text: "Lambo dreams loading…", weight: 2 },
+  { text: "This dip builds character", weight: 2 },
+  { text: "Patience: 0%, Hope: 100%", weight: 2 },
+  { text: "I survived rug warnings", weight: 2 },
+  { text: "Me explaining $PEARL to normies", weight: 1 },
+  { text: "Still pre-rich… for now", weight: 1 },
+  { text: "Charts are my gym", weight: 1 },
+  { text: "Emotions not included in ROI", weight: 1 },
+  { text: "Checking $PEARL before breakfast", weight: 1 },
+  { text: "I live for volatility", weight: 1 },
+  { text: "HODL like nobody’s watching", weight: 1 },
+  { text: "My wallet is shy", weight: 1 },
+  { text: "CT: 'How early were you?'", weight: 1 },
+  { text: "Still pre-rich but I flex my pearls", weight: 1 }
 ];
 
-// shuffle outcomes on page load
+// shuffle outcomes on page load for random order
 outcomes = outcomes.sort(() => Math.random() - 0.5);
 
 function weightedRandom(list) {
