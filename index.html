@@ -24,12 +24,8 @@
     width: 100%;
     text-align: center;
     box-shadow: 0 0 60px rgba(0,0,0,.7);
-    position: relative;
   }
-  h1 {
-    font-size: 22px;
-    margin-bottom: 12px;
-  }
+  h1 { font-size: 22px; margin-bottom: 12px; }
   #memeContent {
     background: #0b0b0b;
     border-radius: 12px;
@@ -60,15 +56,11 @@
     color: #000;
     margin-top: 10px;
   }
-  .footer {
-    margin-top: 18px;
-    font-size: 12px;
-    opacity: .5;
-  }
+  .footer { margin-top: 18px; font-size: 12px; opacity: .5; }
 </style>
 </head>
 <body>
-<div class="card" id="card">
+<div class="card">
   <h1>🐻 Still Pre-Rich?</h1>
 
   <button id="checkBtn">Check Status</button>
@@ -85,53 +77,94 @@
 
 <script>
 const outcomes = [
+  // First 10 with images
   { text: "Still pre-rich", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770588565/1770587975617_yheavi.png", weight: 10 },
   { text: "Early but impatient", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588881778_brobx9.png", weight: 8 },
   { text: "Watching charts instead of sleeping", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588932216_l0qpmd.png", weight: 8 },
   { text: "Mentally rich, financially loading", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770588972845_pwd4co.png", weight: 7 },
-  { text: "Too early to brag", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770589010374_fo19e7.png", weight: 7 }
+  { text: "Too early to brag", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770589047/1770589010374_fo19e7.png", weight: 7 },
+  { text: "Diamond hands engaged", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770632881/ff5f5d0d-d115-4120-9416-2ce9d35f6578_x5rwga.png", weight: 6 },
+  { text: "Hodling like a champ", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633118/e2862903-3120-441a-a753-7aa228499ebb_nwdogr.png", weight: 6 },
+  { text: "Watching $PEARL moon", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633129/c74f5316-0fd9-42ad-a8ab-436522264529_rycgqq.png", weight: 5 },
+  { text: "Charts look wild", img: "https://res.cloudinary.com/dztcpcj8d/image/upload/v1770633291/7791aa8f-bbb6-4b4f-a79f-7fb2bee8f87d_iq2tov.png", weight: 5 },
+  // Placeholder text-only outcomes to reach 50
+  { text: "Still pre-rich vibe #11", weight: 4 },
+  { text: "Still pre-rich vibe #12", weight: 4 },
+  { text: "Still pre-rich vibe #13", weight: 4 },
+  { text: "Still pre-rich vibe #14", weight: 4 },
+  { text: "Still pre-rich vibe #15", weight: 4 },
+  { text: "Still pre-rich vibe #16", weight: 4 },
+  { text: "Still pre-rich vibe #17", weight: 4 },
+  { text: "Still pre-rich vibe #18", weight: 4 },
+  { text: "Still pre-rich vibe #19", weight: 4 },
+  { text: "Still pre-rich vibe #20", weight: 4 },
+  { text: "Still pre-rich vibe #21", weight: 3 },
+  { text: "Still pre-rich vibe #22", weight: 3 },
+  { text: "Still pre-rich vibe #23", weight: 3 },
+  { text: "Still pre-rich vibe #24", weight: 3 },
+  { text: "Still pre-rich vibe #25", weight: 3 },
+  { text: "Still pre-rich vibe #26", weight: 3 },
+  { text: "Still pre-rich vibe #27", weight: 3 },
+  { text: "Still pre-rich vibe #28", weight: 3 },
+  { text: "Still pre-rich vibe #29", weight: 3 },
+  { text: "Still pre-rich vibe #30", weight: 3 },
+  { text: "Still pre-rich vibe #31", weight: 2 },
+  { text: "Still pre-rich vibe #32", weight: 2 },
+  { text: "Still pre-rich vibe #33", weight: 2 },
+  { text: "Still pre-rich vibe #34", weight: 2 },
+  { text: "Still pre-rich vibe #35", weight: 2 },
+  { text: "Still pre-rich vibe #36", weight: 2 },
+  { text: "Still pre-rich vibe #37", weight: 2 },
+  { text: "Still pre-rich vibe #38", weight: 2 },
+  { text: "Still pre-rich vibe #39", weight: 2 },
+  { text: "Still pre-rich vibe #40", weight: 2 },
+  { text: "Still pre-rich vibe #41", weight: 1 },
+  { text: "Still pre-rich vibe #42", weight: 1 },
+  { text: "Still pre-rich vibe #43", weight: 1 },
+  { text: "Still pre-rich vibe #44", weight: 1 },
+  { text: "Still pre-rich vibe #45", weight: 1 },
+  { text: "Still pre-rich vibe #46", weight: 1 },
+  { text: "Still pre-rich vibe #47", weight: 1 },
+  { text: "Still pre-rich vibe #48", weight: 1 },
+  { text: "Still pre-rich vibe #49", weight: 1 },
+  { text: "Still pre-rich vibe #50", weight: 1 }
 ];
 
 function weightedRandom(list) {
-  const totalWeight = list.reduce((sum, item) => sum + item.weight, 0);
-  let rand = Math.random() * totalWeight;
+  const total = list.reduce((s, i) => s + i.weight, 0);
+  let r = Math.random() * total;
   for (let item of list) {
-    if (rand < item.weight) return item;
-    rand -= item.weight;
+    if (r < item.weight) return item;
+    r -= item.weight;
   }
 }
 
 function checkStatus() {
   const pick = weightedRandom(outcomes);
-
   const img = document.getElementById("bearImg");
   const resultDiv = document.getElementById("result");
   const screenshotBtn = document.getElementById("screenshotBtn");
 
-  // Hide screenshot button until image fully loads
-  screenshotBtn.style.display = "none";
-
-  // Set result text
   resultDiv.textContent = pick.text;
 
-  // Set image src
-  img.style.display = "none";
-  img.src = pick.img;
+  if (pick.img) {
+    img.style.display = "none";
+    img.src = pick.img;
+    img.onload = () => {
+      img.style.display = "block";
+      screenshotBtn.style.display = "block";
+    }
+  } else {
+    img.style.display = "none";
+    screenshotBtn.style.display = "block"; // show screenshot even if no image
+  }
 
-  // Wait for image to fully load
-  img.onload = () => {
-    img.style.display = "block";
-    screenshotBtn.style.display = "block"; // show screenshot button now
-  };
-
-  window.currentResult = pick;
+  window.currentResult = pick.text;
 }
 
 function takeScreenshot() {
   const memeContent = document.getElementById("memeContent");
   const screenshotBtn = document.getElementById("screenshotBtn");
-
-  // Hide the button immediately
   screenshotBtn.style.display = "none";
 
   html2canvas(memeContent, { backgroundColor: "#0b0b0b", useCORS: true }).then(canvas => {
@@ -143,7 +176,6 @@ function takeScreenshot() {
     }, "image/png");
   }).catch(err => {
     console.error("Screenshot failed:", err);
-    alert("Screenshot failed. Make sure you allow cross-origin images.");
   });
 }
 
